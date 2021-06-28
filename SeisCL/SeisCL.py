@@ -316,8 +316,10 @@ class SeisCL:
     @workdir.setter
     def workdir(self, workdir):
         self.__workdir = workdir
-        if not os.path.isdir(workdir):
+        try:
             os.mkdir(workdir)
+        except FileExistsError:
+            pass
 
     # When setting a file for the datalist, load the datalist from it
     @property
